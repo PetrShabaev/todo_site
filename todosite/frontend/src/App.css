@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.wrapper {
+  padding-bottom : 50px;
+}
+  
+.footer {
+  position : fixed;
+  bottom : 0;
+  width: 100%;
+}
