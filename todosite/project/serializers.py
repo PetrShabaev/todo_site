@@ -1,11 +1,12 @@
 from .models import Project, Todo
-from rest_framework.serializers import ModelSerializer, StringRelatedField
+from rest_framework.serializers import ModelSerializer, StringRelatedField, SlugRelatedField
 from users.serializers import UserModelSerializer
+from users.models import User
 
 
 class ProjectModelSerializer(ModelSerializer):
 
-    user = StringRelatedField(many=True)
+    user = SlugRelatedField(many=True, queryset=User.objects.all(), slug_field='username')
 
     class Meta:
         model = Project
@@ -14,8 +15,8 @@ class ProjectModelSerializer(ModelSerializer):
 
 class TodoModelSerializer(ModelSerializer):
 
-    user = UserModelSerializer()
-    project = StringRelatedField()
+    user = SlugRelatedField(queryset=User.objects.all(), slug_field='username')
+    project = SlugRelatedField(queryset=Project.objects.all(), slug_field='title')
 
     class Meta:
         model = Todo
